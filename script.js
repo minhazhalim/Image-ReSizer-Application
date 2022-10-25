@@ -6,6 +6,13 @@ const resizerCanvas = document.querySelector('.resizer__canvas');
 const zim = resizerCanvas.getContext('2d');
 let activeImage;
 let originalWidthToHeightRatio;
+function resize(width,height){
+     resizerCanvas.width = Math.floor(width);
+     resizerCanvas.height = Math.floor(height);
+     resizerInputWidth.value = Math.floor(width);
+     resizerInputHeight.value = Math.floor(height);
+     zim.drawImage(activeImage,0,0,Math.floor(width),Math.floor(height));
+}
 function openImage(imageSource){
      activeImage = new Image();
      activeImage.addEventListener('load',() => {
@@ -13,13 +20,6 @@ function openImage(imageSource){
           resize(activeImage.width,activeImage.height);
      });
      activeImage.src = imageSource;
-}
-function resize(width,height){
-     resizerCanvas.width = Math.floor(width);
-     resizerCanvas.height = Math.floor(height);
-     resizerInputWidth.value = Math.floor(width);
-     resizerInputHeight.value = Math.floor(height);
-     zim.drawImage(activeImage,0,0,Math.floor(width),Math.floor(height));
 }
 resizerFile.addEventListener('change',(event) => {
      const fileReader = new FileReader();
