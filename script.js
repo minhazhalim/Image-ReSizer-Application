@@ -6,6 +6,21 @@ const resizerCanvas = document.querySelector('.resizer__canvas');
 const zim = resizerCanvas.getContext('2d');
 let activeImage;
 let originalWidthToHeightRatio;
+function openImage(imageSource){
+     activeImage = new Image();
+     activeImage.addEventListener('load',() => {
+          originalWidthToHeightRatio = activeImage.width / activeImage.height;
+          resize(activeImage.width,activeImage.height);
+     });
+     activeImage.src = imageSource;
+}
+function resize(width,height){
+     resizerCanvas.width = Math.floor(width);
+     resizerCanvas.height = Math.floor(height);
+     resizerInputWidth.value = Math.floor(width);
+     resizerInputHeight.value = Math.floor(height);
+     zim.drawImage(activeImage,0,0,Math.floor(width),Math.floor(height));
+}
 resizerFile.addEventListener('change',(event) => {
      const fileReader = new FileReader();
      fileReader.addEventListener('load',() => {
@@ -23,18 +38,3 @@ resizerInputHeight.addEventListener('change',() => {
      const widthValue = resizerAspect.checked ? resizerInputHeight.value * originalWidthToHeightRatio : resizerInputWidth.value;
      resize(widthValue,resizerInputHeight.value);
 });
-function openImage(imageSource){
-     activeImage = new Image();
-     activeImage.addEventListener('load',() => {
-          originalWidthToHeightRatio = activeImage.width / activeImage.height;
-          resize(activeImage.width,activeImage.height);
-     });
-     activeImage.src = imageSource;
-}
-function resize(width,height){
-     resizerCanvas.width = Math.floor(width);
-     resizerCanvas.height = Math.floor(height);
-     resizerInputWidth.value = Math.floor(width);
-     resizerInputHeight.value = Math.floor(height);
-     zim.drawImage(activeImage,0,0,Math.floor(width),Math.floor(height));
-}
