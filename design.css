@@ -1,0 +1,18 @@
+.resizer {
+     font-family: sans-serif;
+     font-weight: bold;
+     padding: 20px;
+     width: 500px;
+}
+.dimensions {
+     padding: 20px 0px;
+}
+.resizer__input {
+     padding: 5px;
+     width: 75px;
+}
+.resizer__canvas {
+     max-width: 100%;
+     width: 500px;
+     height: 500px;
+}
